@@ -12,28 +12,8 @@ import {
 } from '@iconscout/react-unicons';
 import axios from 'axios';
 
-const weatherIcons = {
-    '01d': <UilSun size={50} />,
-    '01n': <UilSunset size={50} />,
-    '02d': <UilClouds size={50} />,
-    '02n': <UilClouds size={50} />,
-    '03d': <UilClouds size={50} />,
-    '03n': <UilClouds size={50} />,
-    '04d': <UilClouds size={50} />,
-    '04n': <UilClouds size={50} />,
-    '09d': <UilTear size={50} />,
-    '09n': <UilTear size={50} />,
-    '10d': <UilTear size={50} />,
-    '10n': <UilTear size={50} />,
-    '11d': <UilWind size={50} />,
-    '11n': <UilWind size={50} />,
-    '13d': <UilSnowflake size={50} />,
-    '13n': <UilSnowflake size={50} />,
-    '50d': <UilMist size={50} />,
-    '50n': <UilMist size={50} />,
-  };
-
 function Home() {
+  const makeIconURL = (iconId) => `https://openweathermap.org/img/wn/${iconId}@2x.png`
 
     const [data, setData] = useState({
         celscius: 10,
@@ -44,6 +24,7 @@ function Home() {
 
     const [name, setName] = useState('');
     const [weatherIcon, setWeatherIcon] = useState(null);
+   
     
 useEffect(()=>{
     const fetchData = async () => {
@@ -88,12 +69,12 @@ return (
                 <button onClick={handleClick}><img src="/images/search.png" alt="" /></button>
             </div>
             <div className='winfo'>
-            {weatherIcon && weatherIcons[weatherIcon] ? (
+            {weatherIcon && (
             <>
-              {weatherIcons[weatherIcon]}
-              <p>{data.name}</p>
+              <img src={makeIconURL(weatherIcon)} alt='Weather Icon' />
+              <p></p>
             </>
-          ) : null}
+          )}
                 <h1>{Math.round(data.celscius)}&deg;C</h1>
                 <h2>{data.name}</h2>
                 <div className="details">
